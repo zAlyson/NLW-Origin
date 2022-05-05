@@ -1,11 +1,23 @@
+window.addEventListener('scroll', onScroll);
+
 function onScroll() {
-  // check if scrollY is greater than 0 (if user has scrolled)
-  if (window.scrollY > 0) {
-    // if yes, add class to header
+  showNavOnScroll();
+  shopBackToTopButtonOnScroll();
+}
+
+function showNavOnScroll() {
+  if (scrollY > 0) {
     document.getElementById('navigation').classList.add('scrolled');
   } else {
-    // if not, remove class from header
     document.getElementById('navigation').classList.remove('scrolled');
+  }
+}
+
+function shopBackToTopButtonOnScroll() {
+  if (scrollY > 400) {
+    document.getElementById('backToTopButton').classList.add('show');
+  } else {
+    document.getElementById('backToTopButton').classList.remove('show');
   }
 }
 
@@ -16,3 +28,20 @@ function openExtendedMenu() {
 function closeExtendedMenu() {
   document.getElementsByTagName('body')[0].classList.remove('menu-expanded');
 }
+
+ScrollReveal({
+  distance: '30px',
+  origin: 'top',
+  duration: 700,
+}).reveal(`
+  #home,
+  #home img,
+  #home .stats,
+  #services,
+  #services header,
+  #services .card,
+  #about,
+  #about header,
+  #about .content`);
+
+onScroll();
